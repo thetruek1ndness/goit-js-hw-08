@@ -9,8 +9,8 @@ formRef.addEventListener('submit', submitBtnHandler);
 
 if (JSON.parse(localStorage.getItem(STORAGE_KEY))) {
   const { email, message } = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  formRef.email.value = email;
-  formRef.message.value = message;
+  formRef.email.value = email || "";
+  formRef.message.value = message || "";
 }
 
 function userTypingHandler(evt) {
@@ -22,12 +22,12 @@ function submitBtnHandler(evt) {
   evt.preventDefault();
   
   if(!(formRef.email.value && formRef.message.value)){
-    console.log("Заповніть всі поля");
+    window.alert("Заповніть всі поля");
     return;
   }
 
   console.log(userData);
   evt.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
+  localStorage.setItem(STORAGE_KEY, {});
   return;
 }
